@@ -27,6 +27,7 @@ public:
    int8_t readAllChannels(uint16_t* data);
 void printData(uint16_t* data,int n);
 
+uint16_t readChannel(uint8_t n);
 
 };
 

@@ -164,4 +164,29 @@ int8_t AS7343::readAllChannels(uint16_t* data)
 }
 
 
+uint16_t AS7343::readChannel(uint8_t n)
+{
+  if(n<0 || n>17)
+  return 0;
 
+ 
+  if(writeRegister(0xD6,0x60)!=0)
+  return -1;
+
+  if(writeRegister(POWER,0x03)!=0)
+  return -2;
+
+  delay(5);
+
+  Serial.print("power = ");
+  Serial.println(readRegister(POWER));
+
+  while((readRegister(0x90) & 0x40) == 0 )
+  {
+    Serial.println("avalid is still 0");
+  }
+
+  Serial.println("avalid is now 1 ");
+  uint8_t regAddress=0x95 + (2*n);
+  return read16(regAddress);
+}
