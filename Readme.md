@@ -14,6 +14,23 @@ Arduino driver for the **AMS AS7343 spectral sensor**. This library provides sim
 
 ---
 
+## Channel Mapping (18-Channels ~ 14 unique channels)
+When calling `readAllChannels()`, the `uint16_t` array is populated in the order dictated by the hardware's `auto_smux` Mode 3:
+
+| Index | Label | Peak Wavelength | Index | Label | Peak Wavelength |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **0** | FZ | 450nm | **9** | F6 | 640nm |
+| **1** | FY | 555nm | **10** | VIS | (Clear) |
+| **2** | FXL | 600nm | **11** | FD | (Flicker) |
+| **3** | NIR | 855nm | **12** | F1 | 405nm |
+| **4** | VIS | (Clear) | **13** | F7 | 690nm |
+| **5** | FD | (Flicker) | **14** | F8 | 745nm |
+| **6** | F2 | 425nm | **15** | F5 | 550nm |
+| **7** | F3 | 475nm | **16** | VIS | (Clear) |
+| **8** | F4 | 515nm | **17** | FD | (Flicker) |
+
+---
+
 ## Basic Usage
 
 ```cpp
@@ -61,10 +78,14 @@ Used to read a **single 8‑bit register** such as status flags or identificatio
 ### Example: Reading the Device ID
 
 ```cpp
-// 0x92 is the Device ID register for AS7343
-uint8_t deviceID = sensor.readRegister(0x92);
+// 0x5A is the Device ID register for AS7343 which 0x81(different from device address)
 
-Serial.print("Device ID (should be 0x11 for AS7343): 0x");
+//To access register with address below 0x80 , 4th bit of CFG0 must be set to 1
+
+sensor.writeRegister(CFG0,16);
+uint8_t deviceID = sensor.readRegister(0x5A);
+
+Serial.print("Device ID (should be 0x81 for AS7343): 0x");
 Serial.println(deviceID, HEX);
 ```
 
@@ -171,15 +192,7 @@ if (sensor.readAllChannels(myData)) {
 
 ---
 
-## License
 
-MIT License
-
----
-
-## Author
-
-AS7343 Arduino Driver – minimal, register‑accurate implementation
 
 
 

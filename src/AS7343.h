@@ -9,6 +9,7 @@
 #define AGAIN 0xC6
 #define SMUX 0xD6
 #define LED 0xCD
+#define CFG0 0xBF
 
 class AS7343
 {
