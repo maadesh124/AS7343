@@ -18,17 +18,31 @@ private:
 public:
     AS7343(uint8_t address=0x39);
     ~AS7343();
-    void setLED(bool state);
-bool begin(uint16_t astep=0x0257,uint8_t atime=0x3B,uint8_t again=0x07);
-   uint8_t writeRegister(uint8_t reg,uint8_t val);
-   uint8_t readRegister(uint8_t reg);
-   uint16_t read16(uint8_t reg);
-   bool readData(uint16_t* data,uint8_t startReg,uint8_t n);
-   bool readAllChannels(uint16_t* data);
+    //sets up AS7343 sensor
+    bool begin(uint16_t astep=0x0257,uint8_t atime=0x3B,uint8_t again=0x07);
+
+    //Writes 8bit value to a particular address in AS7343 
+    uint8_t writeRegister(uint8_t reg,uint8_t val);
+
+    //Reads a 8 bit register in AS7343
+    uint8_t readRegister(uint8_t reg);
+
+    //Reads 2 consecutive addresses starting from reg
+    uint16_t read16(uint8_t reg);
+
+    //reads 2*n 8 bit values stored consecutive registers as n 16bit values
+    //results are stored in data*
+    bool readData(uint16_t* data,uint8_t startReg,uint8_t n);
+
+    //reads all 18 channels and stores the result in data
+    bool readAllChannels(uint16_t* data);
+
+    //reads a particular channel n 
+    // channels are labelled from 0 to 17.
+    uint16_t readChannel(uint8_t n);
+
+    //prints the array of length n
     void printData(uint16_t* data,int n);
-
-uint16_t readChannel(uint8_t n);
-
 
 };
 
