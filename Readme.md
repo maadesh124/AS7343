@@ -12,6 +12,52 @@ Arduino driver for the **AMS AS7343 spectral sensor**. This library provides sim
 * Optional single‑channel access helpers
 * AVR‑safe `Wire` usage (repeated START, explicit casting)
 
+
+---
+
+## Installation
+
+### Option 1: Install as an Arduino Library (Recommended)
+
+1. Download or clone this repository
+2. Rename the folder to **AS7343** (important)
+3. Copy it to your Arduino libraries directory:
+
+* **Windows**: `Documents/Arduino/libraries/`
+* **Linux**: `~/Arduino/libraries/`
+* **macOS**: `~/Documents/Arduino/libraries/`
+
+Final structure should look like:
+
+```
+Arduino/
+└── libraries/
+    └── AS7343/
+        ├── src/
+        │   ├── AS7343.h
+        │   └── AS7343.cpp
+        └── README.md
+```
+
+4. Restart the Arduino IDE
+
+---
+
+### Option 2: Install using ZIP (Arduino IDE)
+
+1. Download the library as a **ZIP file**
+2. Open Arduino IDE
+3. Go to **Sketch → Include Library → Add .ZIP Library…**
+4. Select the downloaded ZIP file
+5. Restart the IDE if required
+
+---
+
+### Required Dependencies
+
+* Arduino **Wire** library (built-in)
+* Supported boards: **AVR (UNO, Nano)**
+
 ---
 
 ## Channel Mapping (18-Channels ~ 14 unique channels)
