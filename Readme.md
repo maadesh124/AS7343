@@ -231,7 +231,6 @@ if (sensor.readAllChannels(myData)) {
 
 ## Notes & Best Practices
 
-* Always read `ASTATUS (0x94)` before bulk data reads
 * Data registers are **little‑endian** (LOW byte first)
 * Do not shift the I²C address (use 7‑bit `0x39` only)
 * On AVR, always use `endTransmission(false)` for repeated START
